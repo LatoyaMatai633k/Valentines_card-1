@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bubu Bear ❤️</title>
+
+  <style>
+    :root{
+      --glass: rgba(255,255,255,.10);
+      --stroke: rgba(255,255,255,.20);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.80);
+    }
+
+    *{ box-sizing:border-box; }
+
+    html, body { width:100%;
+    }
+
+
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow-x: hidden;
+      display:grid;
+      place-items:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      overflow:hidden;
+      padding: 26px;
+      background:#070612;
+    }
+
+    /* DARK FLOWING GRADIENT (no white) */
+    .bg{
+      position:fixed;
+      inset:-35%;
+      background: linear-gradient(120deg,
+        #ff2d55,
+        #b5179e,
+        #7209b7,
+        #3a0ca3,
+        #240046,
+        #ff2d55
+      );
+      background-size: 320% 320%;
+      animation: flow 12s ease-in-out infinite;
+      filter: blur(44px) saturate(1.35);
+      opacity:.95;
+      z-index:-3;
+    }
+
+    .vignette{
+      position:fixed;
+      inset:0;
+      background: radial-gradient(circle at center,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,.50) 70%,
+        rgba(0,0,0,.75) 100%
+      );
+      z-index:-2;
+      pointer-events:none;
+    }
+
+    @keyframes flow{
+      0%   { transform: translate3d(-2%, -1%, 0) rotate(0deg); background-position: 0% 50%; }
+      50%  { transform: translate3d( 2%,  1%, 0) rotate(2deg); background-position: 100% 50%; }
+      100% { transform: translate3d(-2%, -1%, 0) rotate(0deg); background-position: 0% 50%; }
+    }
+
+    .wrap{
+      width:min(900px, 92vw);
+      border:1px solid var(--stroke);
+      background: var(--glass);
+      border-radius: 26px;
+      padding: 22px;
+      box-shadow: 0 25px 90px rgba(0,0,0,.50);
+      backdrop-filter: blur(14px);
+      position: relative;
+      z-index: 2;
+    }
+
+    .top{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 8px 6px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.16);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.16);
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    /* ✅ SIDE-BY-SIDE LAYOUT */
+    .content{
+      display:grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 18px;
+      align-items: center;
+      padding-top: 16px;
+    }
+
+    /* ✅ MOBILE RESPONSIVE */
+    @media (max-width: 800px){
+      .content{ grid-template-columns: 1fr; }
+    }
+
+    h1{
+      margin: 10px 0 10px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -.7px;
+      text-shadow: 0 12px 35px rgba(0,0,0,.35);
+    }
+
+    p{
+      margin: 8px 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .code{
+      margin-top: 14px;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.16);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color: rgba(255,255,255,.92);
+    }
+    .code strong{ color:#fff; }
+
+    .btnrow{ margin-top: 14px; }
+
+    button{
+      appearance:none;
+      border:0;
+      cursor:pointer;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 900;
+      background: rgba(255,255,255,.88);
+      color:#111;
+      box-shadow: 0 18px 35px rgba(0,0,0,.22);
+    }
+
+    .msg{
+      margin-top: 12px;
+      display:none;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.16);
+      color: rgba(255,255,255,.94);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    /* ✅ VIDEO ON THE RIGHT */
+    .videoBox{
+      width:100%;
+      aspect-ratio: 4/5;
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.22);
+    }
+
+    .videoBox video{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .footer{
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.16);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: rgba(255,255,255,.78);
+      font-size: 14px;
+    }
+
+    .brand{
+      display:inline-flex;
+      gap: 8px;
+      align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.16);
+      font-weight: 900;
+    }
+
+    /* FLOATING HEARTS */
+    .heart{
+      position:fixed;
+      bottom:-40px;
+      font-size: 22px;
+      opacity: .9;
+      animation: floatUp linear infinite;
+      z-index: 0;
+      filter: drop-shadow(0 14px 26px rgba(0,0,0,.35));
+      pointer-events:none;
+    }
+    @keyframes floatUp{
+      from { transform: translateY(0) translateX(0) rotate(0deg); }
+      to   { transform: translateY(-120vh) translateX(60px) rotate(25deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="vignette"></div>
+
+  <!-- hearts -->
+  <div class="heart" style="left:12%; animation-duration:10s;">❤️</div>
+  <div class="heart" style="left:24%; animation-duration:12s;">💗</div>
+  <div class="heart" style="left:40%; animation-duration:9s;">💘</div>
+  <div class="heart" style="left:56%; animation-duration:11s;">💞</div>
+  <div class="heart" style="left:72%; animation-duration:13s;">💖</div>
+  <div class="heart" style="left:86%; animation-duration:10s;">💕</div>
+
+  <main class="wrap">
+    <div class="top">
+      <div class="badge">🧸 <span>Bubu Bear</span></div>
+      <div class="badge">❤️ <span>Kagiso</span></div>
+    </div>
+
+    <!-- ✅ LEFT = MESSAGE | RIGHT = VIDEO -->
+    <section class="content">
+      <div class="leftSide">
+        <h1>Happy Valentine’s Day, my love ❤️</h1>
+
+        <p>
+          I built this for you because you’re not just my person… you’re my home.
+        </p>
+
+        <div class="code">
+          <div><strong>Error 404:</strong> Love without you not found.</div>
+          <div><strong>Fix:</strong> Stay with me forever ❤️</div>
+        </div>
+
+        <div class="btnrow">
+          <button id="tapBtn" type="button">Tap for your message 💌</button>
+        </div>
+
+        <div class="msg" id="msgBox"></div>
+      </div>
+
+      <div class="videoBox">
+        <video autoplay muted loop playsinline>
+          <source src="us.mp4" type="video/mp4">
+        </video>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div>Built by <b>Latoya Matai</b></div>
+      <div class="brand">💻 Thanos Codes</div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("tapBtn");
+      const box = document.getElementById("msgBox");
+
+      const booMessage =
+`My Bubu Bear… my husband, my love of my life ❤️
+
+I love you so much. Thank you for the support you’ve been giving me, it does not go unnoticed.
+You are the father of my kids and my forever person.
+
+I cant stop gaining weight, I am a stufuza because of the happiness you bring into my life 😭💘
+
+May your pockets never dry, and may you enjoy every blessing and love that is coming your way.
+I pray every day that everything you wish for becomes true, by God’s grace.
+
+And Mama is proudly watching over you in heaven 🤍
+from Malemon (Mama Yaya❤️❤️❤️❤️)`;
+
+      btn.addEventListener("click", () => {
+        box.style.display = "block";
+        box.textContent = booMessage;
+      });
+    });
+  </script>
+</body>
+</html>
